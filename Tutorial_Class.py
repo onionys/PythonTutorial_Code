@@ -126,6 +126,7 @@ else:
 
 #----------------------------------
 ## 請注意此區段的兩組if elif else 判斷式在輸入 2 的時候會產生不同的結果
+#----------------------------------
 
 select = int(input())
 if select < 3:
@@ -135,6 +136,7 @@ elif select > 1:
 else:
     print("other condition")
 
+# ----
 print("Attention ....")
 if select < 3:
     print("selection < 3")
@@ -173,6 +175,7 @@ print(a)
 
 #----------------------------------
 ## 注意這邊 for loop 的用法
+#----------------------------------
 a = [1,2,3,4,5]
 for i in a:
     i = 10
@@ -191,8 +194,10 @@ print(a)
 a = { chr(i+65):i for i in range(10)}
 print(a)
 
-# 練習 for loop
 
+
+#----------------------------------
+# 練習 for loop
 #----------------------------------
 print(  [i for i in range(10) if i % 2 == 1]  )
 a = list(range(10))
@@ -218,8 +223,10 @@ while(system_run):
     else:
         print("Unknown Selection")
 
-# File Write
 
+
+#----------------------------------
+# File Write
 #----------------------------------
 outf = open("test.txt","w")
 outf.write("ABCDEF")
@@ -231,8 +238,9 @@ with open("test2.txt",'w') as outf:
     outf.write("ABCDEF")
     outf.write("GHIJKL")
 
-# File read 
 
+#----------------------------------
+# File read 
 #----------------------------------
 filename = 'oil2.csv'
 inf = open(filename)
@@ -269,10 +277,11 @@ print(data)
 data = [i.strip() for i in open(filename)]
 print(data)
 
-# 讀取 big5 編碼的檔案
 
 #----------------------------------
-## 注意該檔案中的價錢數值會多加一個"元"字 
+# 讀取 big5 編碼的檔案
+#----------------------------------
+## 注意該檔案中的價錢數值會多一個"元"字 
 filename = "oil_big5.csv"
 lines = [line.strip() for line in open(filename, encoding="big5")]
 data = []
@@ -286,28 +295,36 @@ for i in lines[1:]:
     data.append((date, oil_98, oil_95, oil_92, diesel))
 print(data)
 
-# 函式練習
 
+
+#----------------------------------
+# 函式練習
 #----------------------------------
 ## 注意 func1() , func2(), func3() 的差異
 ## func3() 會有錯誤出現
 msg = 'TEST'
+
 def func1():
     print("func1 : " + msg)
+
 func1()
 
 def func2():
     global msg
     print("func2 : " + msg)
     msg = "ABC"
+
 func2()
 print(msg)
 
 def func3():
     print("func3 : " + msg)
     msg = "DEF"
+
 func3()
 
+#----------------------------------
+# function 的引入參數練習
 #----------------------------------
 def say_my_name(name="Heisenberg", more_msg = False):
     msg = "You are %s!" % name
@@ -329,8 +346,9 @@ say_my_name(True)
 print("TEST6")
 say_my_name(True,True)
 
-# 用 Dictionary 和 function 實作 switch case 的做法
 
+#----------------------------------
+# 用 Dictionary 和 function 實作 switch case 的做法
 #----------------------------------
 def do1():
     print("Do something 1...")
@@ -358,8 +376,11 @@ while(system_run):
     selection = input() 
     switch_case.get(selection, default_func)()
 
-# Generator : yield
 
+
+
+#----------------------------------
+# Generator : yield
 #----------------------------------
 from time import sleep
 def ffunc_yield():
@@ -383,8 +404,9 @@ for i in ffunc_yield():
 for i in ffunc_return():
     print(i)
 
-# class 制作練習
 
+#----------------------------------
+# class 制作練習
 #----------------------------------
 class LCD:
     def __init__(self):
@@ -432,6 +454,8 @@ class LCD:
         print("------------------")
 
 #----------------------------------
+# class 使用測試
+#----------------------------------
 lcd1 = LCD()
 lcd1.put_str("LCD1:")
 lcd1.put_str("Hello World")
@@ -444,8 +468,8 @@ lcd2.put_str("LCD2")
 lcd2.put_str_at("TEST LCD Class",1,1)
 lcd2.show()
 
+#----------------------------------
 # enmerate 練習
-
 #----------------------------------
 a = list("abcdefghijklmnopqrstuvwxyz")
 
@@ -457,6 +481,9 @@ print("enumerate test 2")
 for i,j in enumerate(a):
     print(" %d : %s" % (i,j))
 
+#----------------------------------
+# 讀取oil2.csv 並使用enumerate來
+# 附加 index 在每一行的開頭然後寫入另一個檔案。
 #----------------------------------
 filename = "oil2.csv"
 
@@ -472,8 +499,8 @@ with open(filename) as inf:
         print(line)
 
 
+#----------------------------------
 # zip 練習
-
 #----------------------------------
 a = [1,2,3,4,5]
 b = list('abcde')
@@ -501,6 +528,14 @@ for i in a:
 print(i)
 
 #----------------------------------
+# 讀取 分析 oil2.csv 三個得到
+# 98, 95, 92, 和 柴油的價格list: 
+# oil_98= [...]
+# oil_95 = [...]
+# oil_92 = [...]
+# dieesel = [...]
+# 用zip 重新打包順序為 ... 柴油, 98, 95, 92) , ] 
+#----------------------------------
 oil_98 = []
 oil_95 = []
 oil_92 = []
@@ -518,8 +553,8 @@ result = list(zip(diesel,oil_98,oil_95,oil_92))
 print(result)
 
 
+#----------------------------------
 # map 練習
-
 #----------------------------------
 def do_something(x):
     return x ** 2
@@ -540,6 +575,10 @@ for i in map(do_something, a):
 
 
 #----------------------------------
+# 讀取 分析 oil2.csv 得到95汽油的
+# 價格，並利用 map 計算每個日期
+# 加滿 2.5 公升的價格
+#----------------------------------
 def get_price(x):
     return x * 2.5
 data = []
@@ -552,8 +591,8 @@ with open('oil2.csv') as inf:
 for i in map(get_price,data):
     print(i)
 
+#---------------------------------
 # fileter 練習
-
 #----------------------------------
 def my_choice(x):
     return True if x > 10 else False
@@ -567,6 +606,11 @@ for i in filter(my_choice,a):
     print(i)
 
 #----------------------------------
+# 讀取 分析 oil2.csv ，並利用 filter 
+# 去掉92汽油低於30元以下的資料，並
+# 寫入到另一個檔案。
+#----------------------------------
+
 def choice_data(x):
     line = x.strip().split(',')
     oil_92 = float(line[3])
